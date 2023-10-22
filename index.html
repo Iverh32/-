@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #0077b6;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 36px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        p {
+            font-size: 18px;
+        }
+    </style>
+    <script>
+        // Здесь укажите ваш API-ключ UptimeRobot
+        var apiKey = 'ВАШ_API_КЛЮЧ';
+
+        // URL мониторинга (ваш сайт)
+        var monitorURL = 'https://example.com';
+
+        // Функция для проверки доступности сайта
+        function checkWebsiteAvailability() {
+            fetch('https://api.uptimerobot.com/v2/getMonitors', {
+                method: 'POST',
+                body: JSON.stringify({
+                    api_key: apiKey,
+                    monitors: monitorURL
+                }),
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Обработка данных мониторинга
+                if (data.monitors[0].status === 9) {
+                    alert('Сайт недоступен');
+                    // Дополнительные действия при недоступности
+                }
+            });
+        }
+
+        // Проверка доступности при загрузке страницы
+        window.addEventListener('load', checkWebsiteAvailability);
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Демо сайт</h1>
+    </header>
+</body>
+</html>
